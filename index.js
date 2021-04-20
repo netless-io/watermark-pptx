@@ -1,8 +1,11 @@
 const rimraf = require("rimraf");
+const imagemin = require("imagemin");
+const jpg = require("imagemin-jpegtran");
+const png = require("imagemin-pngquant");
 const dw = require("digital-watermarking");
 const { spawnSync } = require("child_process");
 const { renameSync } = require("fs");
-const { opendir, rename } = require("fs/promises");
+const { opendir, rename, unlink } = require("fs/promises");
 const { join, extname, resolve } = require("path");
 
 let watermarkText = "Hello, world!";
@@ -106,7 +109,15 @@ async function main() {
                 fontSize,
                 tempfile
             );
-            await rename(tempfile, p);
+            const [{ destinationPath }] = await imagemin([tempfile], {
+                destination: 'imagemin',
+                plugins: [
+                    jpg(),
+                    png({ quality: [0.5, 0.8] }),
+                ]
+            });
+            await unlink(tempfile);
+            await rename(destinationPath, p);
             console.log("marked", p, `(${(index += 1)}/${tasks.length})`);
         }
         const ext = extname(file);

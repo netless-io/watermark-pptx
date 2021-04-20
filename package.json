@@ -13,6 +13,9 @@
     "digital-watermarking": "^1.1.12"
   },
   "dependencies": {
+    "imagemin": "^7.0.1",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-pngquant": "^9.0.2",
     "ora": "^5.4.0",
     "rimraf": "^3.0.2"
   }
