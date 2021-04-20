@@ -23,10 +23,12 @@ try {
     if (process.platform === "darwin") {
         console.info("try: brew install zip unzip");
         console.info("you can find brew here: https://brew.sh");
-    }
-    if (process.platform === "win32") {
+    } else if (process.platform === "win32") {
         console.info("try: scoop install zip unzip");
         console.info("you can find scoop here: https://scoop.sh");
+    } else {
+        console.info("try: apt install zip unzip");
+        console.info("you can find zip and unzip here: https://command-not-found.com/zip and https://command-not-found.com/unzip");
     }
 }
 
