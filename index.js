@@ -1,6 +1,6 @@
 const rimraf = require("rimraf");
 const imagemin = require("imagemin");
-const jpg = require("imagemin-jpegtran");
+const jpg = require("imagemin-mozjpeg");
 const png = require("imagemin-pngquant");
 const dw = require("digital-watermarking");
 const { spawnSync } = require("child_process");
@@ -94,7 +94,7 @@ async function main() {
         unzip(file, "temp");
         console.log("adding watermark...");
         const tasks = [];
-        for await (const p of walk("./temp")) {
+        for await (const p of walk("temp")) {
             if (supportedExts.some((e) => p.endsWith("." + e))) {
                 tasks.push(p);
             }
@@ -112,7 +112,7 @@ async function main() {
             const [{ destinationPath }] = await imagemin([tempfile], {
                 destination: 'imagemin',
                 plugins: [
-                    jpg(),
+                    jpg({ quality: 70 }),
                     png({ quality: [0.5, 0.8] }),
                 ]
             });
