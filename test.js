@@ -34,7 +34,9 @@ async function main() {
     const supportedExts = "jpg jpeg png bmp tiff".split(" ");
     for await (const p of walk("temp")) {
         if (supportedExts.some((e) => p.endsWith("." + e))) {
-            images.push(p);
+            if (!String(p).includes("docProps/thumbnail")) {
+                images.push(p);
+            }
         }
     }
     const p = images[(Math.random() * images.length) | 0];
