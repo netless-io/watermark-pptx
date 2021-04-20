@@ -1,0 +1,19 @@
+{
+  "name": "@hyrious/watermark",
+  "version": "0.1.0",
+  "description": "mark all images in pptx",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [
+    "automata"
+  ],
+  "author": "hyrious",
+  "license": "MIT",
+  "devDependencies": {
+    "digital-watermarking": "^1.1.12"
+  },
+  "dependencies": {
+    "ora": "^5.4.0",
+    "rimraf": "^3.0.2"
+  }
+}
