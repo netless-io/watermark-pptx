@@ -1,6 +1,6 @@
 const rimraf = require("rimraf");
 const imagemin = require("imagemin");
-const jpg = require("imagemin-mozjpeg");
+const jpg = require("imagemin-jpegtran");
 const png = require("imagemin-pngquant");
 const dw = require("digital-watermarking");
 const { spawnSync } = require("child_process");
@@ -96,7 +96,9 @@ async function main() {
         const tasks = [];
         for await (const p of walk("temp")) {
             if (supportedExts.some((e) => p.endsWith("." + e))) {
-                tasks.push(p);
+                if (!String(p).includes("docProps/thumbnail")) {
+                    tasks.push(p);
+                }
             }
         }
         let index = 0;
