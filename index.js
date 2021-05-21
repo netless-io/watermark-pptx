@@ -8,8 +8,8 @@ const { renameSync } = require("fs");
 const { opendir, rename, unlink } = require("fs/promises");
 const { join, extname, resolve } = require("path");
 
-let watermarkText = "Hello, world!";
-let fontSize = 1.1;
+let watermarkText = "tedu";
+let fontSize = 1;
 
 function system(cmd, stdio = "pipe") {
     return spawnSync(cmd, { stdio, shell: true }).stdout?.toString();
